@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:vrumies/ui/home/home_page.dart';
+import 'package:vrumies/presentation/bloc/login/login_bloc.dart';
+import 'package:vrumies/presentation/bloc/login/login_event.dart';
+import 'package:vrumies/presentation/bloc/login/login_state.dart';
+import 'package:vrumies/presentation/ui/home/home_page.dart';
 
 class SignOrUp extends StatefulWidget {
   const SignOrUp({Key? key}) : super(key: key);
@@ -14,15 +18,25 @@ class _SignOrUpState extends State<SignOrUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(
-          children: [
-            _buildBackground(context),
-            _buildCenterContent(context),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 20),
-              child: Image.asset('assets/images/vrumies_logo.png',width: 160,height: 100,),
-            )
-          ],
+        child: BlocProvider<LoginBloc>(
+          create: (_)=>LoginBloc(),
+          child: BlocListener<LoginBloc,LoginAuthState>(
+            listener: (context,state){
+              if(state is SuccesLoadLoginAuthState){
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext c)=>const HomePage()));
+              }
+            },
+            child: Stack(
+              children: [
+                _buildBackground(context),
+                _buildCenterContent(context),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 20),
+                  child: Image.asset('assets/images/vrumies_logo.png',width: 160,height: 100,),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -78,14 +92,6 @@ class _SignOrUpState extends State<SignOrUp> {
           _buildSignOrUpWithGoogle(context),
           const SizedBox(
             height: 35,
-          ),
-          _buildOrLine(context),
-          const SizedBox(
-            height: 35,
-          ),
-          _buildSignOrUpwithFacebook(context),
-          const SizedBox(
-            height: 20,
           ),
         ],
       ),
@@ -150,36 +156,40 @@ class _SignOrUpState extends State<SignOrUp> {
     );
   }
 
-  Widget _buildSignOrUpWithGoogle(BuildContext context) {
-    return InkWell(
-        onTap: (){
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext c )=>const HomePage()));
-        },
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.45,
-        height: 71,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            border: Border.all(color: Colors.white, width: 4)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset(
-              'assets/icons/icons_google.svg',
-              height: 24,
-              width: 24,
+  BlocBuilder _buildSignOrUpWithGoogle(BuildContext context) {
+    return BlocBuilder<LoginBloc,LoginAuthState>(
+      builder: (context,state) {
+        return InkWell(
+            onTap: (){
+              context.read<LoginBloc>().add(Login());
+            },
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.45,
+            height: 71,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                border: Border.all(color: Colors.white, width: 4)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  'assets/icons/icons_google.svg',
+                  height: 24,
+                  width: 24,
+                ),
+                const SizedBox(
+                  width: 27,
+                ),
+                const Text(
+                  'Sign Up/In with Google',
+                  style: TextStyle(
+                      color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600),
+                )
+              ],
             ),
-            const SizedBox(
-              width: 27,
-            ),
-            const Text(
-              'Sign Up/In with Google',
-              style: TextStyle(
-                  color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600),
-            )
-          ],
-        ),
-      ),
+          ),
+        );
+      }
     );
   }
 }

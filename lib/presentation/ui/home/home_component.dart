@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:vrumies/ui/home/home_page.dart';
+import 'package:vrumies/presentation/ui/home/home_page.dart';
 
-import '../../shared/colors_value.dart';
+import '../../../shared/colors_value.dart';
 
 class ReviewedHomeComponent extends StatefulWidget {
   const ReviewedHomeComponent({Key? key}) : super(key: key);
@@ -177,208 +177,209 @@ class _TopVbtHomeComponentState extends State<TopVbtHomeComponent> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 0.74,
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  const Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 48.0, bottom: 74),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        ShaderMask(
-                          blendMode: BlendMode.srcIn,
-                          shaderCallback: (rect) => const LinearGradient(
-                                  colors: [
-                                ColorsValue.green,
-                                ColorsValue.black,
-                              ],
-                                  begin: Alignment.centerLeft,
-                                  end: Alignment.centerRight)
-                              .createShader(rect),
-                          child: Text(
-                            'Top VBT Posts     ',
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 40,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.74,
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 48.0, bottom: 74),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ShaderMask(
+                            blendMode: BlendMode.srcIn,
+                            shaderCallback: (rect) => const LinearGradient(
+                                    colors: [
+                                  ColorsValue.green,
+                                  ColorsValue.black,
+                                ],
+                                    begin: Alignment.centerLeft,
+                                    end: Alignment.centerRight)
+                                .createShader(rect),
+                            child: Text(
+                              'Top VBT Posts     ',
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 40,
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Image.asset(
-                          "assets/images/line_gradDiamond.png",
-                          width: 230,
-                          fit: BoxFit.fill,
-                        )
-                      ],
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Image.asset(
+                            "assets/images/line_gradDiamond.png",
+                            width: 230,
+                            fit: BoxFit.fill,
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  const Spacer(),
-                  InkWell(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext c) => const HomePage()));
-                    },
-                    child: const Text(
-                      'BACK',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          color: ColorsValue.green),
+                    const Spacer(),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext c) => const HomePage()));
+                      },
+                      child: const Text(
+                        'BACK',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            color: ColorsValue.green),
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 74,
-                  )
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 86.0),
-                child: GridView.count(
-                  crossAxisCount: 4,
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  childAspectRatio: 0.72,
-                  children: List.generate(
-                    12,
-                    (index) => Stack(
-                      children: [
-                        Positioned(
-                          top: 10,
-                          left: 10,
-                          child: SizedBox(
+                    const SizedBox(
+                      width: 74,
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 86.0),
+                  child: GridView.count(
+                    crossAxisCount: 4,
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    childAspectRatio: 0.72,
+                    children: List.generate(
+                      12,
+                      (index) => Stack(
+                        children: [
+                          Positioned(
+                            top: 10,
+                            left: 10,
+                            child: SizedBox(
+                              width: 200,
+                              height: 340,
+                              child: Image.asset(
+                                'assets/images/bg_top_vbt2.png',
+                              ),
+                            ),
+                          ),
+                          SizedBox(
                             width: 200,
                             height: 340,
                             child: Image.asset(
-                              'assets/images/bg_top_vbt2.png',
+                              'assets/images/bg_top_vbt1.png',
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 200,
-                          height: 340,
-                          child: Image.asset(
-                            'assets/images/bg_top_vbt1.png',
-                          ),
-                        ),
-                        Positioned(
-                          top: 20,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 25.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  index % 2 == 0
-                                      ? 'Autopart selling'.toUpperCase()
-                                      : 'Mobile/shop services'.toUpperCase(),
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 10,
-                                      color: ColorsValue.green),
-                                ),
-                                SizedBox(
-                                  width: 151,
-                                  height: 228,
-                                  child: index % 2 == 0
-                                      ? Image.asset('assets/images/roger1.png')
-                                      : Image.asset('assets/images/roger2.png'),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 14),
-                                  child: Text(
-                                    index % 2 != 0
-                                        ? 'AHMAD GEORGE'
-                                        : 'ROGER CURTIS',
+                          Positioned(
+                            top: 20,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 25.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    index % 2 == 0
+                                        ? 'Autopart selling'.toUpperCase()
+                                        : 'Mobile/shop services'.toUpperCase(),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.w700,
-                                        color: Colors.white,
-                                        letterSpacing: 4,
-                                        fontSize: 10),
+                                        fontSize: 10,
+                                        color: ColorsValue.green),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 26.0, top: 4, bottom: 9),
-                                  child: Row(
-                                    children: [
-                                      Row(
-                                        children: List.generate(
-                                          index % 2 == 0 ? 4 : 5,
-                                          (index) => Row(
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 5.0),
-                                                child: SvgPicture.asset(
-                                                  'assets/icons/icon_star.svg',
-                                                  width: 13,
-                                                  height: 13,
+                                  SizedBox(
+                                    width: 151,
+                                    height: 228,
+                                    child: index % 2 == 0
+                                        ? Image.asset('assets/images/roger1.png')
+                                        : Image.asset('assets/images/roger2.png'),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 14),
+                                    child: Text(
+                                      index % 2 != 0
+                                          ? 'AHMAD GEORGE'
+                                          : 'ROGER CURTIS',
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.white,
+                                          letterSpacing: 4,
+                                          fontSize: 10),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 26.0, top: 4, bottom: 9),
+                                    child: Row(
+                                      children: [
+                                        Row(
+                                          children: List.generate(
+                                            index % 2 == 0 ? 4 : 5,
+                                            (index) => Row(
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      right: 5.0),
+                                                  child: SvgPicture.asset(
+                                                    'assets/icons/icon_star.svg',
+                                                    width: 13,
+                                                    height: 13,
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      index % 2 == 0
-                                          ? SizedBox(
-                                              width: 13,
-                                              height: 13,
-                                              child: Image.asset(
-                                                  'assets/images/half_star.png'),
-                                            )
-                                          : const SizedBox.shrink()
-                                    ],
+                                        index % 2 == 0
+                                            ? SizedBox(
+                                                width: 13,
+                                                height: 13,
+                                                child: Image.asset(
+                                                    'assets/images/half_star.png'),
+                                              )
+                                            : const SizedBox.shrink()
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 46),
-                                  child: Row(
-                                    children: [
-                                      SvgPicture.asset(
-                                        'assets/icons/icon_token.svg',
-                                        width: 13,
-                                        height: 13,
-                                      ),
-                                      const SizedBox(
-                                        width: 8,
-                                      ),
-                                      Text(
-                                        _topVbtPost[index].toString(),
-                                        style: const TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w700,
-                                            color: ColorsValue.yellow),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 46),
+                                    child: Row(
+                                      children: [
+                                        SvgPicture.asset(
+                                          'assets/icons/icon_token.svg',
+                                          width: 13,
+                                          height: 13,
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text(
+                                          _topVbtPost[index].toString(),
+                                          style: const TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w700,
+                                              color: ColorsValue.yellow),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
-        ),
-        const HomeRightSide()
-      ],
-    );
+          const HomeRightSide()
+        ],
+      );
+
   }
 }
 
@@ -392,6 +393,7 @@ class HomeRightSide extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
+        const SizedBox(height: 60),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           width: MediaQuery.of(context).size.width * 0.26,

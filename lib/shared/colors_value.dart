@@ -11,4 +11,5 @@ class ColorsValue {
   static const Color gradSearch = Color(0xff3b5998);
   static const Color gray2 = Color(0xffC4C4C4);
   static const Color red = Color(0xffFF0000);
+  static const Color borderGray=Color(0xffABABAB);
 }

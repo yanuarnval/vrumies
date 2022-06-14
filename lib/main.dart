@@ -1,11 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vrumies/firebase_options.dart';
+import 'package:vrumies/presentation/ui/home/home_page.dart';
+import 'package:vrumies/presentation/ui/signinorup/signin_or_up.dart';
 import 'package:vrumies/shared/colors_value.dart';
-import 'package:vrumies/ui/home/home_page.dart';
-import 'package:vrumies/ui/signinorup/signin_or_up.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 

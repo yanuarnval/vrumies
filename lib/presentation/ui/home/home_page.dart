@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:vrumies/presentation/ui/profile/profile_page.dart';
 import 'package:vrumies/shared/colors_value.dart';
-import 'package:vrumies/ui/home/home_component.dart';
+import 'package:vrumies/presentation/ui/home/home_component.dart';
 
 import '../bookmark/bookmark_page.dart';
 import '../message/message_page.dart';
@@ -38,6 +39,7 @@ class _HomePageState extends State<HomePage> {
   List _topVbtPost = [12, 15, 9, 15];
   final CarouselController _controller = CarouselController();
   int _selectedIndex = 0;
+  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +47,14 @@ class _HomePageState extends State<HomePage> {
       _buildHome(context),
       const MessagePage(),
       const BookmarkPage(),
-      Container(),
+      const ProfilePage(),
       const TopVbtHomeComponent(),
       const ReviewedHomeComponent()
     ];
     return Scaffold(
       backgroundColor: ColorsValue.black,
       body: SingleChildScrollView(
+        controller: _scrollController,
         physics: _selectedIndex == 1
             ? const NeverScrollableScrollPhysics()
             : const AlwaysScrollableScrollPhysics(),
