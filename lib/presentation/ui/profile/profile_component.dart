@@ -1,7 +1,8 @@
-import 'dart:html';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'google_map_widget.dart';
 
 import '../../../shared/colors_value.dart';
 
@@ -266,6 +267,311 @@ class MyPostContent extends StatelessWidget {
           ),
         )
       ],
+    );
+  }
+}
+
+class LocationFilter extends StatefulWidget {
+  const LocationFilter({Key? key}) : super(key: key);
+
+  @override
+  State<LocationFilter> createState() => _LocationFilterState();
+}
+
+class _LocationFilterState extends State<LocationFilter> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const Text(
+          'My Location Filter Options',
+          style: TextStyle(
+              fontWeight: FontWeight.w700, fontSize: 34, color: Colors.white),
+        ),
+        const SizedBox(
+          height: 38,
+        ),
+        _buildMenuFilterOps(),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 46.0),
+              child: Text(
+                'Choose which Location Filter Posts to use:',
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white),
+              ),
+            ),
+            Row(
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      primary: ColorsValue.green,
+                      padding: const EdgeInsets.all(20)),
+                  child: const Text(
+                    'Near me',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 21,
+                        color: Colors.white),
+                  ),
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.transparent,
+                      side:
+                          const BorderSide(color: ColorsValue.green, width: 3),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5)),
+                      padding: const EdgeInsets.all(20)),
+                  child: const Text(
+                    'Online Only Posts',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 21,
+                        color: ColorsValue.green),
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.transparent,
+                        side: const BorderSide(color: Colors.grey, width: 1),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5)),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 30, vertical: 15)),
+                    child: const Text(
+                      'Show All Posts',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 17,
+                          color: Colors.grey),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                        primary: ColorsValue.green,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5)),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 70, vertical: 20)),
+                    child: const Text(
+                      'OK',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 21,
+                          color: Colors.black),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        )
+      ],
+    );
+  }
+
+  Row _buildMenuFilterOps() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text(
+              'View Live Map',
+              style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: ColorsValue.green),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            InkWell(
+              onTap: () {
+                _showGmapsDialog(context);
+              },
+              child: Image.asset(
+                'assets/images/live_map.png',
+                width: 240,
+                height: 245,
+              ),
+            ),
+          ],
+        ),
+        Container(
+          width: 1,
+          color: Colors.white,
+          height: 280,
+          margin: const EdgeInsets.only(left: 18),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 50.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text(
+                'Set My Locations:',
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: ColorsValue.green),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Image.asset(
+                'assets/images/my_location.png',
+                width: 190,
+                height: 195,
+              ),
+            ],
+          ),
+        ),
+        Container(
+          width: 1,
+          color: Colors.white,
+          height: 280,
+          margin: const EdgeInsets.only(right: 28),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Adjust Distance:',
+              style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 15,
+                  color: ColorsValue.green),
+            ),
+            _buildEstimateed(),
+          ],
+        )
+      ],
+    );
+  }
+
+  Container _buildEstimateed() {
+    return Container(
+      width: 365,
+      height: 90,
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
+      margin: const EdgeInsets.only(top: 40),
+      color: Colors.white,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text(
+                'ESTIMATED DISTANCE',
+                style: TextStyle(
+                    fontSize: 13, letterSpacing: 1, color: Colors.black45),
+              ),
+              Text(
+                '38 miles',
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 13,
+                    color: Colors.black54),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              const Text(
+                '0',
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 13,
+                    color: Colors.black54),
+              ),
+              Expanded(
+                child: SliderTheme(
+                  data: const SliderThemeData(
+                    trackHeight: 1,
+                    activeTrackColor: Colors.blue,
+                    overlayColor: Colors.transparent,
+                    thumbShape: RoundSliderThumbShape(enabledThumbRadius: 6.0),
+                  ),
+                  child: Slider(
+                    value: 20,
+                    min: 0,
+                    onChanged: (value) {},
+                    max: 100,
+                  ),
+                ),
+              ),
+              const Text(
+                '100',
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 13,
+                    color: Colors.black54),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Future<void> _showGmapsDialog(BuildContext c) {
+    return showDialog<void>(
+      context: c,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.8,
+            height: MediaQuery.of(context).size.height * 0.85,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 50, right: 20),
+                  child: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(
+                        Icons.close,
+                        size: 45,
+                        color: ColorsValue.green,
+                      )),
+                ),
+                SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    height: MediaQuery.of(context).size.height * 0.7,
+                    child: googleMapsWidget()),
+              ],
+            ),
+          ),
+          backgroundColor: Colors.transparent,
+        );
+      },
     );
   }
 }

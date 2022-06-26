@@ -31,7 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
     const BlockedUser(),
     const SizedBox(),
     const SizedBox(),
-    const SizedBox(),
+    const LocationFilter(),
     const SizedBox(),
   ];
 
