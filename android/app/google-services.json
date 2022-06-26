@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "899540093795",
+    "project_id": "vrumies-mac",
+    "storage_bucket": "vrumies-mac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899540093795:android:08587273cfd185415fa156",
+        "android_client_info": {
+          "package_name": "com.example.vrumies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "899540093795-u6ind6oc0ufu2b3jm257ts7i9j9tt96d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxWZIdueZ1BrvyoDDXrI35SJOa9jpme_U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "899540093795-u6ind6oc0ufu2b3jm257ts7i9j9tt96d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
