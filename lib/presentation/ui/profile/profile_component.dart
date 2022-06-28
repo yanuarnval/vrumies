@@ -1,7 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:vrumies/presentation/bloc/profile/gmapswidget/google_maps_widget_bloc.dart';
+import 'package:vrumies/presentation/bloc/profile/gmapswidget/google_maps_widget_event.dart';
+import 'package:vrumies/presentation/bloc/profile/gmapswidget/google_maps_widget_state.dart';
 import 'google_map_widget.dart';
 
 import '../../../shared/colors_value.dart';
@@ -281,111 +285,118 @@ class LocationFilter extends StatefulWidget {
 class _LocationFilterState extends State<LocationFilter> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Text(
-          'My Location Filter Options',
-          style: TextStyle(
-              fontWeight: FontWeight.w700, fontSize: 34, color: Colors.white),
-        ),
-        const SizedBox(
-          height: 38,
-        ),
-        _buildMenuFilterOps(),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 46.0),
-              child: Text(
-                'Choose which Location Filter Posts to use:',
-                style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<GoogleMapsWidgetBloc>(
+          create: (_) => GoogleMapsWidgetBloc(),
+        )
+      ],
+      child: Column(
+        children: [
+          const Text(
+            'My Location Filter Options',
+            style: TextStyle(
+                fontWeight: FontWeight.w700, fontSize: 34, color: Colors.white),
+          ),
+          const SizedBox(
+            height: 38,
+          ),
+          _buildMenuFilterOps(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 46.0),
+                child: Text(
+                  'Choose which Location Filter Posts to use:',
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white),
+                ),
               ),
-            ),
-            Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                      primary: ColorsValue.green,
-                      padding: const EdgeInsets.all(20)),
-                  child: const Text(
-                    'Near me',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 21,
-                        color: Colors.white),
-                  ),
-                ),
-                const SizedBox(
-                  width: 15,
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.transparent,
-                      side:
-                          const BorderSide(color: ColorsValue.green, width: 3),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5)),
-                      padding: const EdgeInsets.all(20)),
-                  child: const Text(
-                    'Online Only Posts',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 21,
-                        color: ColorsValue.green),
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Row(
                 children: [
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                        primary: Colors.transparent,
-                        side: const BorderSide(color: Colors.grey, width: 1),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5)),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 30, vertical: 15)),
+                        primary: ColorsValue.green,
+                        padding: const EdgeInsets.all(20)),
                     child: const Text(
-                      'Show All Posts',
+                      'Near me',
                       style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 17,
-                          color: Colors.grey),
+                          fontWeight: FontWeight.w700,
+                          fontSize: 21,
+                          color: Colors.white),
                     ),
+                  ),
+                  const SizedBox(
+                    width: 15,
                   ),
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                        primary: ColorsValue.green,
+                        primary: Colors.transparent,
+                        side: const BorderSide(
+                            color: ColorsValue.green, width: 3),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5)),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 70, vertical: 20)),
+                        padding: const EdgeInsets.all(20)),
                     child: const Text(
-                      'OK',
+                      'Online Only Posts',
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 21,
-                          color: Colors.black),
+                          color: ColorsValue.green),
                     ),
                   ),
                 ],
               ),
-            ),
-          ],
-        )
-      ],
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.transparent,
+                          side: const BorderSide(color: Colors.grey, width: 1),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 15)),
+                      child: const Text(
+                        'Show All Posts',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 17,
+                            color: Colors.grey),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                          primary: ColorsValue.green,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 70, vertical: 20)),
+                      child: const Text(
+                        'OK',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 21,
+                            color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 
@@ -409,15 +420,19 @@ class _LocationFilterState extends State<LocationFilter> {
               height: 16,
             ),
             InkWell(
-              onTap: () {
-                _showGmapsDialog(context);
-              },
-              child: Image.asset(
-                'assets/images/live_map.png',
-                width: 240,
-                height: 245,
-              ),
-            ),
+                  onTap: () {
+
+
+                    _showGmapsDialog(context);
+                  },
+                  child: Image.asset(
+                    'assets/images/live_map.png',
+                    width: 240,
+                    height: 245,
+                  ),
+                )
+
+
           ],
         ),
         Container(
@@ -565,7 +580,7 @@ class _LocationFilterState extends State<LocationFilter> {
                 SizedBox(
                     width: MediaQuery.of(context).size.width * 0.7,
                     height: MediaQuery.of(context).size.height * 0.7,
-                    child: googleMapsWidget()),
+                    child: const GoogleMapsWidget()),
               ],
             ),
           ),

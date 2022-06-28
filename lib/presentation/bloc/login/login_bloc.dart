@@ -1,7 +1,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vrumies/data/services/firebase_auth.dart';
+import 'package:vrumies/data/services/firebase/firebase_auth_services.dart';
 
 import 'login_event.dart';
 import 'login_state.dart';

@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
           // is not restarted.
         textTheme: GoogleFonts.poppinsTextTheme(),
           primaryColor: ColorsValue.green),
-      home: const SignOrUp(),
+      home: const HomePage(),
     );
   }
 }

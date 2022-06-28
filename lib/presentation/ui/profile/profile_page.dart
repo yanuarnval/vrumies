@@ -69,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       color: Colors.black.withOpacity(0.52),
                       borderRadius: BorderRadius.circular(16),
                     ),
-                    child: _profilMenuContentList[selected],
+                    child: _profilMenuContentList[5],
                   )
                 ],
               );

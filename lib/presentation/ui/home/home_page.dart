@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
             _buildheader(context),
             IndexedStack(
               children: page,
-              index: _selectedIndex,
+              index: 3,
             )
           ],
         ),
