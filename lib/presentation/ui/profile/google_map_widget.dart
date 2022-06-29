@@ -53,7 +53,14 @@ class _GoogleMapsWidgetState extends State<GoogleMapsWidget> {
       const ImageConfiguration(size: Size(100, 100)),
       "assets/images/office6.png",
     );
-    List<BitmapDescriptor> _imgmark = [office0,office1, office2, office3,office4,office5];
+    List<BitmapDescriptor> _imgmark = [
+      office0,
+      office1,
+      office2,
+      office3,
+      office4,
+      office5
+    ];
     final googleOffices = model.Locations.fromJson(
       jsonDecode(
         await rootBundle.loadString('assets/icons/location.json'),
@@ -106,5 +113,75 @@ class _GoogleMapsWidgetState extends State<GoogleMapsWidget> {
         },
       ),
     );
+  }
+}
+
+class SetMyLocationGmapsWidget extends StatefulWidget {
+  const SetMyLocationGmapsWidget({Key? key}) : super(key: key);
+
+  @override
+  State<SetMyLocationGmapsWidget> createState() =>
+      _SetMyLocationGmapsWidgetState();
+}
+
+class _SetMyLocationGmapsWidgetState extends State<SetMyLocationGmapsWidget> {
+  late LatLng _posUser;
+  late BitmapDescriptor userImgMarker;
+  late GoogleMapController _mapController;
+  Map<String, Marker> _markers = {};
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => GoogleMapsWidgetBloc(),
+      child: BlocBuilder<GoogleMapsWidgetBloc, GoogleMapsWidgetState>(
+        builder: (context, state) {
+          if (state is InitialGoogleMapsWidgetState) {
+            context.read<GoogleMapsWidgetBloc>().add(GetUserLocation());
+          }
+          if (state is SuccesLoadGoogleMapsWidgetState) {
+            _posUser = LatLng(state.lat, state.lng);
+            return GoogleMap(
+              onMapCreated: _onMapCreated,
+              onTap: (value) {
+                if (_markers['selected'] == null) {
+                  Marker _selected = Marker(
+                    markerId: const MarkerId('selected'),
+                    position: value,
+                  );
+                  setState(() {
+                    _markers['selected'] = _selected;
+                  });
+                }
+              },
+              initialCameraPosition: CameraPosition(
+                target: LatLng(state.lat, state.lng),
+                zoom: 11.0,
+              ),
+              markers: _markers.values.toSet(),
+            );
+          }
+          return const Center(
+            child: CircularProgressIndicator(
+              color: ColorsValue.green,
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  void _onMapCreated(GoogleMapController controller) async {
+    _mapController = controller;
+    userImgMarker = await BitmapDescriptor.fromAssetImage(
+      const ImageConfiguration(size: Size(100, 100)),
+      "assets/images/account.png",
+    );
+    setState(() {
+      _markers['user'] = Marker(
+          markerId: const MarkerId('user'),
+          position: _posUser,
+          icon: userImgMarker);
+    });
   }
 }

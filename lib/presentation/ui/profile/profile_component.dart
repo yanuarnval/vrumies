@@ -420,19 +420,15 @@ class _LocationFilterState extends State<LocationFilter> {
               height: 16,
             ),
             InkWell(
-                  onTap: () {
-
-
-                    _showGmapsDialog(context);
-                  },
-                  child: Image.asset(
-                    'assets/images/live_map.png',
-                    width: 240,
-                    height: 245,
-                  ),
-                )
-
-
+              onTap: () {
+                _showGmapsDialog(context, true);
+              },
+              child: Image.asset(
+                'assets/images/live_map.png',
+                width: 240,
+                height: 245,
+              ),
+            )
           ],
         ),
         Container(
@@ -457,10 +453,15 @@ class _LocationFilterState extends State<LocationFilter> {
               const SizedBox(
                 height: 16,
               ),
-              Image.asset(
-                'assets/images/my_location.png',
-                width: 190,
-                height: 195,
+              InkWell(
+                onTap: () {
+                  _showGmapsDialog(context, false);
+                },
+                child: Image.asset(
+                  'assets/images/my_location.png',
+                  width: 190,
+                  height: 195,
+                ),
               ),
             ],
           ),
@@ -554,7 +555,7 @@ class _LocationFilterState extends State<LocationFilter> {
     );
   }
 
-  Future<void> _showGmapsDialog(BuildContext c) {
+  Future<void> _showGmapsDialog(BuildContext c, bool type) {
     return showDialog<void>(
       context: c,
       builder: (BuildContext context) {
@@ -562,27 +563,80 @@ class _LocationFilterState extends State<LocationFilter> {
           content: SizedBox(
             width: MediaQuery.of(context).size.width * 0.8,
             height: MediaQuery.of(context).size.height * 0.85,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 50, right: 20),
-                  child: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(
-                        Icons.close,
-                        size: 45,
-                        color: ColorsValue.green,
-                      )),
-                ),
-                SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.7,
-                    height: MediaQuery.of(context).size.height * 0.7,
-                    child: const GoogleMapsWidget()),
-              ],
-            ),
+            child: (type)
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 50, right: 20),
+                        child: IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(
+                              Icons.close,
+                              size: 45,
+                              color: ColorsValue.green,
+                            )),
+                      ),
+                      SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.7,
+                          height: MediaQuery.of(context).size.height * 0.7,
+                          child: const GoogleMapsWidget())
+                    ],
+                  )
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 50, right: 20),
+                        child: IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(
+                              Icons.close,
+                              size: 45,
+                              color: ColorsValue.green,
+                            )),
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.65,
+                        height: MediaQuery.of(context).size.height * 0.65,
+                        child: const SetMyLocationGmapsWidget(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(primary: ColorsValue.red,minimumSize: const Size(230, 50)),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text(
+                                'CANCEL',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700, fontSize: 28),
+                              ),
+                            ),
+                            const SizedBox(width: 20,),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(primary: ColorsValue.green,minimumSize: const Size(230, 50)),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text(
+                                'CONFIRM',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700, fontSize: 28,color: Colors.black),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
           ),
           backgroundColor: Colors.transparent,
         );
