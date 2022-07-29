@@ -2,13 +2,14 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:table_calendar/table_calendar.dart';
-import 'package:vrumies/presentation/ui/profile/profile_page.dart';
-import 'package:vrumies/shared/colors_value.dart';
-import 'package:vrumies/presentation/ui/home/home_component.dart';
+import 'package:vrumies/presentation/ui/mobile/home/home_page_mobile.dart';
 
+import 'package:vrumies/shared/colors_value.dart';
+
+import '../profile/profile_page.dart';
 import '../bookmark/bookmark_page.dart';
 import '../message/message_page.dart';
+import 'home_component.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class _HomePageState extends State<HomePage> {
     {'title': 'Car/motorcycle/\nRV selling', 'icon': 'motocar_selling.png'},
     {'title': 'Commercial\nEquipment&Service', 'icon': 'ecommerce_money.png'},
   ];
-  List _imagesReviewed = [
+  final List _imagesReviewed = [
     {'img': 'reviewed1.png', 'name': 'Jordyn  Stanton'},
     {'img': 'reviewed2.png', 'name': 'Adison Gouse'},
     {'img': 'reviewed3.png', 'name': 'Kianna Bergson'},
@@ -36,7 +37,7 @@ class _HomePageState extends State<HomePage> {
     {'img': 'reviewed3.png', 'name': 'Kianna Bergson'},
     {'img': 'reviewed2.png', 'name': 'Adison Gouse'},
   ];
-  List _topVbtPost = [12, 15, 9, 15];
+  final List _topVbtPost = [12, 15, 9, 15];
   final CarouselController _controller = CarouselController();
   int _selectedIndex = 0;
   final _scrollController = ScrollController();
@@ -53,23 +54,28 @@ class _HomePageState extends State<HomePage> {
     ];
     return Scaffold(
       backgroundColor: ColorsValue.black,
-      body: SingleChildScrollView(
-        controller: _scrollController,
-        physics: _selectedIndex == 1
-            ? const NeverScrollableScrollPhysics()
-            : const AlwaysScrollableScrollPhysics(),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 15,
-            ),
-            _buildheader(context),
-            IndexedStack(
-              children: page,
-              index: _selectedIndex,
-            )
-          ],
-        ),
+      body: _buildDesktopMode(context, page),
+    );
+  }
+
+  SingleChildScrollView _buildDesktopMode(
+      BuildContext context, List<Widget> page) {
+    return SingleChildScrollView(
+      controller: _scrollController,
+      physics: _selectedIndex == 1
+          ? const NeverScrollableScrollPhysics()
+          : const AlwaysScrollableScrollPhysics(),
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 15,
+          ),
+          _buildheader(context),
+          IndexedStack(
+            children: page,
+            index: _selectedIndex,
+          )
+        ],
       ),
     );
   }
@@ -84,8 +90,10 @@ class _HomePageState extends State<HomePage> {
   Container _buildLeftSide(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-          border: Border(
-              right: BorderSide(color: ColorsValue.black_search, width: 4))),
+        border: Border(
+          right: BorderSide(color: ColorsValue.black_search, width: 4),
+        ),
+      ),
       width: MediaQuery.of(context).size.width * 0.74,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

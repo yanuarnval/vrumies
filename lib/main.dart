@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vrumies/firebase_options.dart';
-import 'package:vrumies/presentation/ui/home/home_page.dart';
-import 'package:vrumies/presentation/ui/signinorup/signin_or_up.dart';
+import 'package:vrumies/presentation/ui/desktop/home/home_page.dart';
+import 'package:vrumies/presentation/ui/desktop/signinorup/signin_or_up.dart';
+import 'package:vrumies/presentation/ui/mobile/home/home_page_mobile.dart';
+import 'package:vrumies/presentation/ui/mobile/main_screen_mobile.dart';
 import 'package:vrumies/shared/colors_value.dart';
 
 void main() async {
@@ -19,10 +21,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.landscapeLeft,
-    ]);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

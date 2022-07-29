@@ -1,11 +1,13 @@
-import 'dart:html';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vrumies/presentation/bloc/cubit/profil_ui_cubit.dart';
-import 'package:vrumies/presentation/ui/profile/profile_component.dart';
+
 import 'package:vrumies/shared/colors_value.dart';
+
+import '../profile/profile_component.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);

@@ -4,11 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:vrumies/presentation/bloc/profile/gmapswidget/google_maps_widget_bloc.dart';
-import 'package:vrumies/presentation/bloc/profile/gmapswidget/google_maps_widget_event.dart';
-import 'package:vrumies/presentation/bloc/profile/gmapswidget/google_maps_widget_state.dart';
 import 'google_map_widget.dart';
 
-import '../../../shared/colors_value.dart';
+import '../../../../shared/colors_value.dart';
 
 class MyPostContent extends StatelessWidget {
   const MyPostContent({

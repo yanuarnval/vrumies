@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:vrumies/presentation/ui/home/home_page.dart';
 
-import '../../../shared/colors_value.dart';
+import '../../../../shared/colors_value.dart';
+import 'home_page.dart';
 
 class ReviewedHomeComponent extends StatefulWidget {
   const ReviewedHomeComponent({Key? key}) : super(key: key);
